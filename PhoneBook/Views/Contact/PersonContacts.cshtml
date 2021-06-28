@@ -1,0 +1,13 @@
+﻿@model ContactViewModel
+<h3><a asp-controller="Home" asp-action="Index"> &larr;Назад</a></h3>
+<h2>@Model.person.Surname @Model.person.Name @Model.person.Patronymic</h2>
+<p>@Model.person.Position @Model.person.Organization</p>
+<p>@Model.person.Birthday.ToString("D")</p>
+@{ 
+    foreach (var contact in Model.contacts)
+            {
+                <p>@contact.ContactType: @contact.ContactContent</p>
+            }
+}
+<a asp-controller="Add" asp-action="AddContact" asp-route-PersonID="@Model.person.Id">Редактировать</a>
+<a asp-controller="Contact" asp-action="DeletePerson" asp-route-PersonID="@Model.person.Id">Удалить</a>

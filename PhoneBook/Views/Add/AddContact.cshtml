@@ -1,0 +1,74 @@
+﻿@model AddViewModel
+
+<div>
+    <a asp-controller="Home" asp-action="Index"> &larr;Назад</a>
+    <h3>Добавление контакта</h3>
+    
+    <form asp-action="AddContact" method="post">
+        @{ if (!(Model.person is null)) { <input type="hidden" asp-for="person.Id" value="@Model.person.Id"/>} }
+        <div>
+            <label asp-for="person.Surname"></label>
+            <div>
+                <input asp-for="person.Surname" />
+                <span asp-validation-for="person.Surname"></span>
+            </div>
+        </div>
+        <div>
+            <label asp-for="person.Name"></label>
+            <div>
+                <input asp-for="person.Name" />
+            </div>
+            <span style="color:red" asp-validation-for="person.Name"></span>
+        </div>
+        <div>
+            <label asp-for="person.Patronymic"></label>
+            <div>
+                <input asp-for="person.Patronymic" />
+                <span asp-validation-for="person.Patronymic"></span>
+            </div>
+        </div>
+        <div>
+            <label asp-for="person.Birthday"></label>
+            <div>
+                <input asp-for="person.Birthday" />
+            </div>
+        </div>
+        <div>
+            <label asp-for="person.Organization"></label>
+            <div>
+                <input asp-for="person.Organization" />
+                <span asp-validation-for="person.Organization"></span>
+            </div>
+        </div>
+        <div>
+            <label asp-for="person.Position"></label>
+            <div>
+                <input asp-for="person.Position" />
+                <span asp-validation-for="person.Position"></span>
+            </div>
+        </div>
+        <span style="color:red">@ViewBag.Error</span>
+        @{ for (int i = 0; i < Model.forAddContacts.Count(); i++)
+            {
+                <div>
+                    <label>@Model.forAddContacts[i].ContactType</label>
+                    <div>
+                        <input asp-for="@Model.forAddContacts[i].ContactContent" />
+                        <button type="submit" value="Delete" asp-route-index="@i" name="action">Удалить</button>
+                        <input type="hidden" asp-for="@Model.forAddContacts[i].ContactType" value="@Model.forAddContacts[i].ContactType" />
+                        <input type="hidden" asp-for="@Model.forAddContacts[i].ContactId" value="@Model.forAddContacts[i].ContactId" />
+                        <span asp-validation-for="@Model.forAddContacts[i].ContactContent"></span>
+                    </div>
+                </div>
+            }
+        }
+        <div>
+            <button type="submit" value="AddPhone" name="action">Добавить телефон</button>
+            <button type="submit" value="AddEmail" name="action">Добавить Email</button>
+            <button type="submit" value="AddSkype" name="action">Добавить Skype</button>
+            <button type="submit" value="AddOther" name="action">Добавить другое</button>
+        </div>
+
+        <button type="submit" value="Save" name="action">Соханить</button>
+    </form>
+</div>

@@ -1,0 +1,25 @@
+﻿@model HomeViewModel
+       @{ 
+           <ul class="list" style="text-align: center">
+                      @{ if (ViewBag.IsSearched){ <li style="display: inline-block; margin-left: 10px;"><a asp-controller="Home" asp-action="Index"> &larr;Назад</a> </li>}}
+                      <li style="display: inline-block; margin-left: 10px;">
+                          <form asp-controller="Home" asp-action="Index" method="get">
+                              <input type="text" name="search" placeholder="Поиск...">
+                              <input type="submit" value="Найти">
+                           </form>
+                      </li>
+               <li style="display: inline-block; margin-left: 10px;"><a asp-controller="Add" asp-action="AddContact"> Добавить</a></li>
+           </ul>
+           if (!(Model.persons.Count() == 0))
+           {
+               foreach (var person in Model.persons)
+               {
+                   <div><h3><a asp-controller="Contact" asp-action="PersonContacts" asp-route-PersonID="@person.Id">@person.Name</a></h3></div>
+               }
+           }
+           else
+           {
+               <div style="text-align: center"><p> Контактов не найдено. Но их можно ДОБАВИТЬ.</p></div>
+           }
+           
+        }
